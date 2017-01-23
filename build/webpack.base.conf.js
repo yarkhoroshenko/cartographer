@@ -27,8 +27,7 @@ module.exports = {
       'src': path.resolve(__dirname, '../src'),
       'assets': path.resolve(__dirname, '../src/assets'),
       'components': path.resolve(__dirname, '../src/components'),
-      'leaflet': 'leaflet/dist/leaflet-src.js',
-      'shpjs': 'shpjs/dist/shp.js'
+      'leaflet': 'leaflet/dist/leaflet-src.js'
     }
   },
   resolveLoader: {
@@ -69,6 +68,10 @@ module.exports = {
       {
         test: /\.json$/,
         loader: 'json'
+      },
+      {
+        test: /\.(shp|dbf)(\?.*)?$/,
+        loader: 'file?name=[path][name].[ext]'
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

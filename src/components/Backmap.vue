@@ -27,10 +27,14 @@
           }
         },
       }).addTo(this.leafmap);
-      const base = 'map/TM_WORLD_BORDERS_SIMPL-0.3.zip';
-      shp(base).then(function geoCb(data) { // eslint-disable-line
-        geo.addData(data);
-      });
+      const base = './src/assets/TM_WORLD_BORDERS_SIMPL-0.3.shp';
+      shapefile.open(base) // eslint-disable-line
+        .then(source => source.read()
+          .then(function log(result) {
+            if (result.done) geo.addData(result.value);
+            return source.read().then(log);
+          })
+        );
     },
   };
 </script>
